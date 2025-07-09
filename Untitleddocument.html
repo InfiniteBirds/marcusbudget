@@ -14,7 +14,7 @@
   color: white;
   padding: 10px;
   margin-bottom: 20px; /* You might remove or adjust this margin now */
-  border-radius: 2px;
+  border-radius: 5px;
   position: fixed; /* Make it fixed */
   top: 0; /* Position it at the top */
   width: 100%; /* Make it span the width */
@@ -26,21 +26,24 @@
     font-weight: bold;
   }
   .spend-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: grid; /* Change to grid */
+  grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
+  gap: 20px; /* Space between the containers */
+  justify-content: center; /* Center the grid on the page */
+  flex-wrap: wrap; /* Keep this if you want wrapping, but grid handles it by default */
+  padding-top: 60px; /* Keep padding for fixed header */
     background-image: url("https://uploads.onecompiler.io/43pu29vwc/43pttag9n/ugly.png");
   }
   .item-container {
+    /* Remove the fixed width here as grid will manage it */
+    /* width: 150px; */
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 15px;
     background-color: white;
-    width: 150px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+}
   .item-container h3 {
     margin-top: 0;
     color: #333;
@@ -89,7 +92,7 @@
   <h2>Spend Marcus's Cash</h2>
   <div class="money-left" id="moneyLeftDisplay">$160.00</div>
   
-</div><br><br><br><br><br>
+</div><br><br>
 
 <div class="spend-container">
   <div class="item-container">
@@ -274,5 +277,3 @@
 
 </body>
 </html>
-
-
