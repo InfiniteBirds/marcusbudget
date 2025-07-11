@@ -15,6 +15,7 @@
   padding: 10px;
   margin-bottom: 20px; /* You might remove or adjust this margin now */
   border-radius: 5px;
+  text-align: center;
   position: fixed; /* Make it fixed */
   top: 0; /* Position it at the top */
   width: 100%; /* Make it span the width */
@@ -35,14 +36,19 @@
     background-image: url("https://uploads.onecompiler.io/43pu29vwc/43pttag9n/ugly.png");
     padding-left: 200px; /* Add padding to the left side */
   padding-right: 200px;
+  padding-bottom: 20px;
   }
   .item-container {
     /* Remove the fixed width here as grid will manage it */
     /* width: 150px; */
     border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
+    border-radius: 3px;
+    padding: 10px;
+    padding-left: 70px;
+    padding-right: 70px;
+    line-height: 1;
     background-color: white;
+    font-size: 15px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -59,15 +65,33 @@
   }
    .item-container .quantity-display {
       font-size: 15px;
-      margin: 1px 5px;
+      margin: 0px 5px;
       border-radius: 3px;
   }
+  .price{
+  line-height: 0.2;
+  color: limegreen;
+  }
+  .progress-bar-container {
+  width: 90%; /* Adjust width as needed */
+  height: 15px; /* Adjust height */
+  background-color: #ddd; /* Empty bar color */
+  border-radius: 4px;
+  margin: 10px auto; /* Center the bar */
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background-color: #28a745; /* Filled bar color */
+  width: 100%; /* Initially full */
+  transition: width 0.3s ease-in-out; /* Smooth transition */
+}
   .item-container .action-buttons {
       display: flex;
       justify-content: space-around;
   }
   .item-container button {
-    padding: 1px 14px;
+    padding: 1px 10px;
     color: white;
     border: none;
     border-radius: 4px;
@@ -75,16 +99,16 @@
     font-size: 10;
   }
   .item-container .buy-button {
-    background-color: #28a745;
+  background-image: linear-gradient(to bottom, #80EF80, #39AD48); 
   }
    .item-container .buy-button:hover {
-    background-color: #218838;
+    background-color: #320918;
   }
   .item-container .sell-button {
-      background-color: #dc3545;
+background-image: linear-gradient(to bottom, red, #8B0000);
   }
    .item-container .sell-button:hover {
-    background-color: #c82333;
+    background-color: #150929;
   }
 </style>
 </head>
@@ -93,141 +117,157 @@
 <div class="header-container">
   <h2>Spend Marcus's Cash</h2>
   <div class="money-left" id="moneyLeftDisplay">$160.00</div>
+  <div class="progress-bar-container">
+    <div class="progress-bar-fill" id="budgetProgressBar"></div>
+</div>
+
   
-</div><br><br>
+</div><br><br><br><br>
 
 <div class="spend-container">
   <div class="item-container">
-    <h3>Gumball</h3>
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
     <p>$0.10</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
     </div>
-        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display">+</button>
+    <div class="action-buttons">
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <div class="quantity-controls">
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
+    </div>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
     </div>
   </div>
-  
-  <div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
+<div class="item-container">
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
+    <p>$0.10</p>
+    </div>
     <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
         <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
     </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
-    </div>
-  </div>
-  
-  <div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
-    </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
-    </div>
-  </div>
-  
-  <div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
-    </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
-    </div>
-  </div>
-  
-  <div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
-    </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
-    </div>
-  </div>
-  <div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
-    </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
-    </div>
-  </div>
-  <div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
-    </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
     </div>
   </div><div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
+    <p>$0.10</p>
     </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
+    <div class="action-buttons">
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <div class="quantity-controls">
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
+    </div>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
+    </div>
+  </div><div class="item-container">
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
+    <p>$0.10</p>
+    </div>
+    <div class="action-buttons">
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <div class="quantity-controls">
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
+    </div>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
     </div>
   </div>
-  
   <div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
+    <p>$0.10</p>
     </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
+    <div class="action-buttons">
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <div class="quantity-controls">
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
+    </div>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
     </div>
   </div>
   <div class="item-container">
-    <h3>Coffee</h3>
-    <p>$3.00</p>
-    <div class="action-buttons">
-        <button class="sell-button" data-cost="3" data-quantity-target=".quantity-display">-</button>
-        <div class="quantity-controls">
-        <span class="quantity-display" style="border: 1px solid black; padding: 5px 10px; ">0</span>
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
+    <p>$0.10</p>
     </div>
-        <button class="buy-button" data-cost="3" data-quantity-target=".quantity-display">+</button>
+    <div class="action-buttons">
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <div class="quantity-controls">
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
+    </div>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
+    </div>
+  </div>
+  <div class="item-container">
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
+    <p>$0.10</p>
+    </div>
+    <div class="action-buttons">
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <div class="quantity-controls">
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
+    </div>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
+    </div>
+  </div>
+  <div class="item-container">
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
+    <p>$0.10</p>
+    </div>
+    <div class="action-buttons">
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <div class="quantity-controls">
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
+    </div>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
+    </div>
+  </div>
+  <div class="item-container">
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
+    <h4>Gumball</h4>
+    <div class="price">
+    <p>$0.10</p>
+    </div>
+    <div class="action-buttons">
+        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <div class="quantity-controls">
+        <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
+    </div>
+        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
     </div>
   </div>
   
-
-  
-
 </div>
 
 <script>
   // Get references to the HTML elements
   const moneyLeftDisplay = document.getElementById("moneyLeftDisplay");
   const itemContainers = document.querySelectorAll(".item-container"); // Select all item containers
+const budgetProgressBar = document.getElementById("budgetProgressBar");
+
 
   // Initialize the total budget
+  let initialBudget = 160.00
   let totalBudget = 160.00;
 
   // Function to update the displayed money left
   function updateMoneyLeft() {
-    moneyLeftDisplay.textContent = "$" + totalBudget.toFixed(2);
+  moneyLeftDisplay.textContent = "$" + totalBudget.toFixed(2);
+  const remainingPercentage = (totalBudget / initialBudget) * 100;
+  budgetProgressBar.style.width = remainingPercentage.toFixed(2) + "%";
   }
 
   // Iterate through each item container
