@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  </head>
 <title>Budget Tracker with Buy/Sell and Quantity Display</title>
 <style>
   body {
-    font-family: Verdana, sans-serif;
+    font-family: Red Hat Display, sans-serif;
     text-align: center;
     margin-top: 20px;
     background-color: #f4f4f4;
+    
   }
   .header-container {
   background-color: white;
   color: black;
   padding: 10px;
-  border: 2px solid;
-  border-width: 3px;
-  border-color: #808080;
   margin-bottom: 20px; /* You might remove or adjust this margin now */
   border-radius: 1px;
   text-align: center;
 }
+.circular-container {
+  width: 130px; /* Set a fixed width */
+  height: 130px; /* Set height equal to width for a perfect circle */
+  border-radius: 50%; /* This makes the square div into a circle */
+  overflow: hidden; /* Important: Hides parts of the image that go outside the circle */
+   /* Optional: Adds a border around the circle */
+  /* Optional: Center the container */
+  margin: 0 auto; /* To center the container horizontally */
+  display: flex; /* To center the image inside if it doesn't fill */
+  align-items: center; /* To center the image vertically */
+  justify-content: center; /* To center the image horizontally */
+}
+
+.circular-container img {
+  width: 100%; /* Make the image fill the container's width */
+  height: 100%; /* Make the image fill the container's height */
+  object-fit: cover; /* Important: Scales the image to fill the container while maintaining aspect ratio, cropping if necessary */
+  /* If the image itself isn't a square, it will also be clipped by the container's border-radius */
+}
 .spending-money{
   position: sticky;
     text-align: center;
+    font-size: 25px;
     top: 0;
     z-index: 9999;
-    background-color: #003955;
     padding: 20px;
+      background-image: linear-gradient(to bottom, #80EF80, #39AD48); 
+
+    color: white;
 }
   }
   .money-left {
@@ -39,7 +63,7 @@
   gap: 20px; /* Space between the containers */
   justify-content: center; /* Center the grid on the page */
   flex-wrap: wrap; /* Keep this if you want wrapping, but grid handles it by default */
-  padding-top: 60px; /* Keep padding for fixed header */
+  padding-top: 10px; /* Keep padding for fixed header */
     background-image: url("https://uploads.onecompiler.io/43pu29vwc/43pttag9n/ugly.png");
     padding-left: 200px; /* Add padding to the left side */
   padding-right: 200px;
@@ -83,15 +107,18 @@
   width: 90%; /* Adjust width as needed */
   height: 15px; /* Adjust height */
   background-color: #ddd; /* Empty bar color */
-  border-radius: 4px;
+  border-radius: 2px;
   margin: 10px auto; /* Center the bar */
   overflow: hidden;
+  border: 2px solid;
+  border-width: 1px
+  border-color: black;
 }
 .progress-bar-fill {
   height: 100%;
   background-color: #28a745; /* Filled bar color */
   width: 100%; /* Initially full */
-  transition: width 0.3s ease-in-out; /* Smooth transition */
+  transition: width 0.2s ease-in-out; /* Smooth transition */
 }
   .item-container .action-buttons {
       display: flex;
@@ -122,6 +149,9 @@ background-image: linear-gradient(to bottom, red, #8B0000);
 <body>
 
 <div class="header-container">
+  <div class="circular-container">
+  <img src="https://uploads.onecompiler.io/43pu29vwc/43qardh4z/aaass.webp" alt="Description of image">
+</div>
   <h2>Spend Marcus's Cash</h2>
 </div>
 
@@ -130,10 +160,7 @@ background-image: linear-gradient(to bottom, red, #8B0000);
   <div class="progress-bar-container">
     <div class="progress-bar-fill" id="budgetProgressBar"></div>
 </div>
-
-  
 </div>
-
 <div class="spend-container">
   <div class="item-container">
         <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
@@ -190,31 +217,31 @@ background-image: linear-gradient(to bottom, red, #8B0000);
     </div>
   </div>
   <div class="item-container">
-        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
-    <h4>Gumball</h4>
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43qardh4z/dental%20floss.jpg" alt="yum" width="60" height="100">
+    <h4>Dental Floss</h4>
     <div class="price">
-    <p>$0.10</p>
+    <p>$1.90</p>
     </div>
     <div class="action-buttons">
-        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <button class="sell-button" data-cost="1.90" data-quantity-target=".quantity-display"><b>Sell</b></button>
         <div class="quantity-controls">
         <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
     </div>
-        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
+        <button class="buy-button" data-cost="1.90" data-quantity-target=".quantity-display"><b>Buy</b></button>
     </div>
   </div>
   <div class="item-container">
-        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
-    <h4>Gumball</h4>
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43qardh4z/shopping.webp" alt="yum" width="100" height="100">
+    <h4>Ballpoint Pen</h4>
     <div class="price">
-    <p>$0.10</p>
+    <p>$2.00</p>
     </div>
     <div class="action-buttons">
-        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <button class="sell-button" data-cost="2.00" data-quantity-target=".quantity-display"><b>Sell</b></button>
         <div class="quantity-controls">
         <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
     </div>
-        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
+        <button class="buy-button" data-cost="2.00" data-quantity-target=".quantity-display"><b>Buy</b></button>
     </div>
   </div>
   <div class="item-container">
