@@ -152,7 +152,6 @@ background-image: linear-gradient(to bottom, red, #8B0000);
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 5px;
-    text-align: center;
     margin: 40px auto; /* Center the receipt and add space above */
     font-family: monospace; /* Optional: Gives a classic receipt look */
 }
@@ -178,24 +177,38 @@ background-image: linear-gradient(to bottom, red, #8B0000);
     border-collapse: collapse;
     margin-top: 15px;
     margin-bottom: 15px;
+     table-layout: fixed;
 }
+
+.product-list th:nth-child(1) { width: 50%; } /* Item */
+.product-list th:nth-child(2) { width: 15%; } /* Qty */
+.product-list th:nth-child(3) { width: 20%; } /* Price */
+.product-list th:nth-child(4) { width: 10%; }
+
+.product-list tbody:nth-child(1) { width: 50%; } /* Item */
+.product-list tbody:nth-child(2) { width: 15%; } /* Qty */
+.product-list tbody:nth-child(3) { width: 20%; } /* Price */
+.product-list tbody:nth-child(4) { width: 10%; }
 
 .product-list th, .product-list td {
     padding: 5px 0;
-    text-align: left;
     font-size: 0.85em;
     vertical-align: top;
+    text-align: left;
+    table-layout: fixed;
 }
 
 .product-list th {
     border-bottom: 1px dashed #ccc;
     font-weight: bold;
+    text-align:left;
 }
-
+.product-list tbody td:nth-child(1){
+  text-align: left;
+}
 .product-list tbody td:nth-child(2), /* Quantity column */
 .product-list tbody td:nth-child(3), /* Price column */
 .product-list tbody td:nth-child(4) { /* Total column */
-    text-align: right;
 }
 
 .product-list tfoot tr {
@@ -219,14 +232,6 @@ background-image: linear-gradient(to bottom, red, #8B0000);
 .product-list tfoot td:last-child {
     text-align: right;
 }
-
-/* Footer Info */
-.footer-info p {
-    margin: 5px 0;
-    font-size: 0.8em;
-    color: #555;
-}
-
 </style>
 </head>
 <body>
@@ -357,7 +362,7 @@ background-image: linear-gradient(to bottom, red, #8B0000);
   </div>
   <div class="item-container">
         <img src="https://uploads.onecompiler.io/43pu29vwc/43qardh4z/sspot.png" alt="yum" width="85" height="85">
-    <h4>Spotify Premium (1mo)</h4>
+    <h4>One Month of Spotify Premium</h4>
     <div class="price">
     <p>$12</p>
     </div>
@@ -398,17 +403,17 @@ background-image: linear-gradient(to bottom, red, #8B0000);
     </div>
   </div>
   <div class="item-container">
-        <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
-    <h4>Gumball</h4>
+        <img src="https://uploads.onecompiler.io/43pu29vwc/43qardh4z/taki.jpeg" alt="yum" width="100" height="100">
+    <h4>Box of Takis</h4>
     <div class="price">
-    <p>$0.10</p>
+    <p>$31</p>
     </div>
     <div class="action-buttons">
-        <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
+        <button class="sell-button" data-cost="31" data-quantity-target=".quantity-display"><b>Sell</b></button>
         <div class="quantity-controls">
         <span class="quantity-display" style="border: 1px solid black; padding: 5px 20px; ">0</span>
     </div>
-        <button class="buy-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Buy</b></button>
+        <button class="buy-button" data-cost="31" data-quantity-target=".quantity-display"><b>Buy</b></button>
     </div>
   </div>
   <div class="item-container">
@@ -427,9 +432,9 @@ background-image: linear-gradient(to bottom, red, #8B0000);
   </div>
   <div class="item-container">
         <img src="https://uploads.onecompiler.io/43pu29vwc/43pttag9n/CHERRY_GUMBALLS_1024x1024.webp" alt="yum" width="100" height="100">
-    <h4>Gumball</h4>
+    <h4>Lobster Dinner</h4>
     <div class="price">
-    <p>$0.10</p>
+    <p>$45</p>
     </div>
     <div class="action-buttons">
         <button class="sell-button" data-cost="0.10" data-quantity-target=".quantity-display"><b>Sell</b></button>
@@ -475,8 +480,16 @@ background-image: linear-gradient(to bottom, red, #8B0000);
             <!-- Purchased items will be listed here by JavaScript -->
         </tbody>
         <tfoot>
+            <tr class="subtotal-row">
+                <td colspan="3">Subtotal:</td>
+                <td id="receipt-subtotal">$0.00</td>
+            </tr>
+            <tr class="tax-row">
+                <td colspan="3">Tax (8%):</td> <!-- Assuming no tax for this example -->
+                <td id="receipt-tax">$0.00</td>
+            </tr>
             <tr class="total-row">
-                <td colspan="3"><strong>Total:</strong></td>
+                <td colspan="3"><strong>Grand Total:</strong></td>
                 <td id="receipt-grand-total"><strong>$0.00</strong></td>
             </tr>
         </tfoot>
@@ -512,7 +525,8 @@ const receiptDateElement = document.getElementById('receipt-date');
         receiptItemsBody.innerHTML = ''; // Clear existing items
 
         let currentSubtotal = 0;
-      
+        const taxRate = 0.08; // You can change this to 0.08 for 8% tax
+
         receiptItems.forEach(item => {
             const itemTotal = item.quantity * item.price;
             currentSubtotal += itemTotal;
@@ -526,7 +540,12 @@ const receiptDateElement = document.getElementById('receipt-date');
             `;
             receiptItemsBody.appendChild(row);
         });
-        const currentGrandTotal = currentSubtotal;
+
+        const currentTax = currentSubtotal * taxRate;
+        const currentGrandTotal = currentSubtotal + currentTax;
+
+        receiptSubtotalElement.textContent = `$${currentSubtotal.toFixed(2)}`;
+        receiptTaxElement.textContent = `$${currentTax.toFixed(2)}`;
         receiptGrandTotalElement.textContent = `$${currentGrandTotal.toFixed(2)}`;
     }
 
